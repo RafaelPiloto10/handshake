@@ -12,7 +12,7 @@
 		"format": "prettier --plugin=prettier-plugin-svelte --plugin=prettier-plugin-tailwindcss --write ."
 	},
 	"devDependencies": {
-		"@sveltejs/adapter-static": "^2.0.3",
+		"@sveltejs/adapter-vercel": "^2.0.3",
 		"@sveltejs/kit": "^1.20.4",
 		"@types/d3": "^7.4.2",
 		"@typescript-eslint/eslint-plugin": "^6.0.0",

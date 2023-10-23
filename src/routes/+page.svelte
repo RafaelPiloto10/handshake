@@ -31,12 +31,28 @@
 				initializeSVG(width, height, xScale, yScale);
 				keyframes[0].render();
 			}, 100);
-		}, 2000);
+		}, 100);
 	});
 
 	let dark = true;
 
 	const verses = [
+		['In a realm where silence wears a heavy shroud,'],
+		[
+			'In a realm where silence wears a heavy shroud,',
+			'Our hands sought dreams, amidst a thunderous cloud,'
+		],
+		[
+			'In a realm where silence wears a heavy shroud,',
+			'Our hands sought dreams, amidst a thunderous cloud,',
+			'Within a labyrinth of waves, fiercely we tread,'
+		],
+		[
+			'In a realm where silence wears a heavy shroud,',
+			'Our hands sought dreams, amidst a thunderous cloud,',
+			'Within a labyrinth of waves, fiercely we tread,',
+			'Our strength, drowned by hidden rivers, where tears shed.'
+		],
 		[
 			'In a realm where silence wears a heavy shroud,',
 			'Our hands sought dreams, amidst a thunderous cloud,',
@@ -66,9 +82,9 @@
 	const keyframes = [
 		{
 			activeVerse: 0,
-			activeLines: [0, 1, 2, 3, 4, 5],
+			activeLines: [0],
 			render: () => {
-				const d2021 = data.filter((v) => v['FromYear'] === '2021');
+				const d2000s = data.filter((v) => v['FromYear'] === '2018');
 				const x = [
 					'Age',
 					'Color',
@@ -82,7 +98,94 @@
 					'Sex'
 				];
 				const y = x.map((t) =>
-					d2021
+					d2000s
+						.filter((v) => v['Charge/Gender'].includes(t))
+						.reduce((a, b) => a + parseInt(b['Count']), 0)
+				);
+				const d = x.map((v, i) => {
+					return { x: v, y: y[i] };
+				});
+				dark = true;
+				updateBarChart(d, dark, '2018 Charge Counts by Charge Group');
+			}
+		},
+		{
+			activeVerse: 1,
+			activeLines: [1],
+			render: () => {
+				const d2000s = data.filter((v) => v['FromYear'] === '2019');
+				const x = [
+					'Age',
+					'Color',
+					'Disability',
+					'Equal Pay Act',
+					'GINA',
+					'National Origin',
+					'Race',
+					'Religion',
+					'Retaliation',
+					'Sex'
+				];
+				const y = x.map((t) =>
+					d2000s
+						.filter((v) => v['Charge/Gender'].includes(t))
+						.reduce((a, b) => a + parseInt(b['Count']), 0)
+				);
+				const d = x.map((v, i) => {
+					return { x: v, y: y[i] };
+				});
+				dark = true;
+				updateBarChart(d, dark, '2019 Charge Counts by Charge Group');
+			}
+		},
+		{
+			activeVerse: 2,
+			activeLines: [2],
+			render: () => {
+				const d2000s = data.filter((v) => v['FromYear'] === '2020');
+				const x = [
+					'Age',
+					'Color',
+					'Disability',
+					'Equal Pay Act',
+					'GINA',
+					'National Origin',
+					'Race',
+					'Religion',
+					'Retaliation',
+					'Sex'
+				];
+				const y = x.map((t) =>
+					d2000s
+						.filter((v) => v['Charge/Gender'].includes(t))
+						.reduce((a, b) => a + parseInt(b['Count']), 0)
+				);
+				const d = x.map((v, i) => {
+					return { x: v, y: y[i] };
+				});
+				dark = true;
+				updateBarChart(d, dark, '2020 Charge Counts by Charge Group');
+			}
+		},
+		{
+			activeVerse: 3,
+			activeLines: [3],
+			render: () => {
+				const d2000s = data.filter((v) => v['FromYear'] === '2021');
+				const x = [
+					'Age',
+					'Color',
+					'Disability',
+					'Equal Pay Act',
+					'GINA',
+					'National Origin',
+					'Race',
+					'Religion',
+					'Retaliation',
+					'Sex'
+				];
+				const y = x.map((t) =>
+					d2000s
 						.filter((v) => v['Charge/Gender'].includes(t))
 						.reduce((a, b) => a + parseInt(b['Count']), 0)
 				);
@@ -94,10 +197,9 @@
 			}
 		},
 		{
-			activeVerse: 1,
-			activeLines: [0, 1, 2, 3],
+			activeVerse: 4,
+			activeLines: [0, 1, 2, 3, 4],
 			render: () => {
-				const d2021 = data.filter((v) => v['FromYear'] === '2020');
 				const x = [
 					'Age',
 					'Color',
@@ -111,7 +213,35 @@
 					'Sex'
 				];
 				const y = x.map((t) =>
-					d2021
+					data
+						.filter((v) => v['Charge/Gender'].includes(t))
+						.reduce((a, b) => a + parseInt(b['Count']), 0)
+				);
+				const d = x.map((v, i) => {
+					return { x: v, y: y[i] };
+				});
+				dark = true;
+				updateBarChart(d, dark, 'Charge Counts by Charge Group from 2017 - 2021');
+			}
+		},
+		{
+			activeVerse: 5,
+			activeLines: [0, 1, 2, 3, 4],
+			render: () => {
+				const x = [
+					'Age',
+					'Color',
+					'Disability',
+					'Equal Pay Act',
+					'GINA',
+					'National Origin',
+					'Race',
+					'Religion',
+					'Retaliation',
+					'Sex'
+				];
+				const y = x.map((t) =>
+					data
 						.filter((v) => v['Charge/Gender'].includes(t))
 						.reduce((a, b) => a + parseInt(b['Count']), 0)
 				);
@@ -119,16 +249,16 @@
 					return { x: v, y: y[i] };
 				});
 				dark = false;
-				updateBarChart(d, dark, '2020 Charge Counts by Charge Group');
+				updateBarChart(d, dark, 'Charge Counts by Charge Group from 2017 - 2021');
 			}
 		},
 		{
-			activeVerse: 2,
+			activeVerse: 6,
 			activeLines: [0, 1, 2, 3, 4],
 			render: () => {}
 		},
 		{
-			activeVerse: 3,
+			activeVerse: 7,
 			activeLines: [0, 1, 2, 3, 4],
 			render: () => {}
 		}
@@ -211,18 +341,20 @@
 										: 'opacity-20'
 								}`}
 							>
-								{#each lines as line, lineID}
-									<p
-										class={`text-lg ${
-											keyframes.length > keyframe &&
-											keyframes[keyframe].activeLines.includes(lineID)
-												? 'opacity-100'
-												: 'opacity-80'
-										}`}
-									>
-										{line}
-									</p>
-								{/each}
+								<div class="flex flex-col items-start justify-start">
+									{#each lines as line, lineID}
+										<p
+											class={`text-lg ${
+												keyframes.length > keyframe &&
+												keyframes[keyframe].activeLines.includes(lineID)
+													? 'opacity-100'
+													: 'opacity-80'
+											}`}
+										>
+											{line}
+										</p>
+									{/each}
+								</div>
 							</div>
 						{/each}
 					</div>
