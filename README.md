@@ -1,6 +1,6 @@
 # Handshake
 
-A poem about the discrimination in the United States visualized with data collected from the [Equal Employment Opportunity Commission (EEOC)](eeoc.gov)
+A poem about discrimination in the United States visualized with data collected from the [Equal Employment Opportunity Commission (EEOC)](eeoc.gov) using D3.js and Svelte.
 
 ## Running Locally
 
