@@ -187,17 +187,17 @@
 	}
 
 	.dark-ocean {
-		background-image: url('dark-ocean.jpg');
+		background-image: url('/dark-ocean.jpg');
 	}
 
 	.rain {
-		background-image: url('rain.gif');
+		background-image: url('/rain.gif');
 	}
 
 	.stars {
-		background-image: url('stars.jpg');
+		background-image: url('/stars.jpg');
 	}
 	.ocean {
-		background-image: url('ocean.jpg');
+		background-image: url('/ocean.jpg');
 	}
 </style>
