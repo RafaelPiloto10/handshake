@@ -36,7 +36,7 @@
 				initializeSVG(width, height, xScale, yScale);
 				setTimeout(() => {
 					keyframes[0].render(state_data, resolution_data);
-				}, 100);
+				}, 500);
 			}, 100);
 		}, loadTime);
 	});
@@ -55,7 +55,7 @@
 	class={`'text-white' flex h-full w-full flex-row items-center justify-center
 		fill-white transition-all duration-1000 ${backgroundFile} bg-cover`}
 >
-	<div class="h-full w-full">
+	<div class="h-full w-full bg-slate-900/70">
 		<div class={`flex h-full w-full max-w-[1440px] flex-col items-start justify-center p-8`}>
 			{#if mounted}
 				<div
