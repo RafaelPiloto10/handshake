@@ -61,7 +61,7 @@ export function initializeSVG(width: number, height: number, xs: d3.ScaleBand<st
 		.text("");
 }
 
-export function updateBarChart(data: Data, dark: boolean, title = "") {
+export function updateBarChart(data: Data, title = "") {
 	xScale.domain(data.map(d => d.x));
 	yScale.domain([0, d3.max(data, d => d.y)]).nice();
 
@@ -80,8 +80,9 @@ export function updateBarChart(data: Data, dark: boolean, title = "") {
 		.duration(1000)
 		.attr("x", d => xScale(d.x))
 		.attr("y", d => yScale(d.y))
-		.attr("fill", dark ? "white" : "black")
-		.attr("height", d => chartHeight - yScale(d.y));
+		.attr("fill", "white")
+		.attr("height", d => chartHeight - yScale(d.y))
+		.attr("width", xScale.bandwidth());
 
 	bars.enter().append("rect")
 		.attr("class", "bar")
@@ -89,7 +90,7 @@ export function updateBarChart(data: Data, dark: boolean, title = "") {
 		.attr("y", chartHeight)
 		.attr("height", 0)
 		.attr("width", xScale.bandwidth())
-		.attr("fill", dark ? "white" : "black")
+		.attr("fill", "white")
 		.transition()
 		.duration(1000)
 		.attr("y", d => yScale(d.y))
@@ -98,20 +99,20 @@ export function updateBarChart(data: Data, dark: boolean, title = "") {
 	chart.select(".x-axis")
 		.transition()
 		.duration(1000)
-		.attr("color", dark ? "white" : "black")
+		.attr("color", "white")
 		.call(d3.axisBottom(xScale));
 
 	chart.select(".y-axis")
 		.transition()
 		.duration(1000)
-		.attr("color", dark ? "white" : "black")
+		.attr("color", "white")
 		.call(d3.axisLeft(yScale));
 
 	if (title.length > 0) {
 		svg.select("#chart-title")
 			.transition()
 			.duration(1000)
-			.style("fill", dark ? "white" : "black")
+			.style("fill", "white" )
 			.text(title);
 	}
 }
