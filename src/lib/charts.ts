@@ -56,7 +56,7 @@ export function initializeSVG(
 		.attr('x', width / 2)
 		.attr('y', 20)
 		.attr('text-anchor', 'middle')
-		.attr('class', 'text-xl text-white')
+		.attr('class', 'text-2xl text-white')
 		.text('');
 }
 
@@ -128,7 +128,7 @@ export function updateBarChart(data: Data, title = '', ys: undefined | number = 
 			.select('#chart-title')
 			.transition()
 			.duration(1000)
-			.attr('class', 'text-white fill-white')
+			.attr('class', 'text-white fill-white text-2xl')
 			.text(title);
 	}
 }
