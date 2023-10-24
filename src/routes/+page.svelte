@@ -46,16 +46,16 @@
 	$: isDown = false;
 	$: startX = 0;
 	$: scrollLeft = 0;
+	$: backgroundFile = keyframes[keyframe].background;
 
 	let poemContainer: HTMLDivElement;
 </script>
 
 <div
-	class={`'bg-slate-900 text-white' flex h-full w-full flex-row items-center justify-center
-		fill-white transition-all duration-1000
-	${keyframes[keyframe].background !== '' ? keyframes[keyframe].background : ''}`}
+	class={`'text-white' flex h-full w-full flex-row items-center justify-center
+		fill-white transition-all duration-1000 ${backgroundFile} bg-cover`}
 >
-	<div class="h-full w-full bg-slate-900/70">
+	<div class="h-full w-full">
 		<div class={`flex h-full w-full max-w-[1440px] flex-col items-start justify-center p-8`}>
 			{#if mounted}
 				<div
@@ -184,5 +184,20 @@
 	::-webkit-scrollbar-thumb {
 		background-color: white; /* color of the scroll thumb */
 		border-radius: 20px; /* roundness of the scroll thumb */
+	}
+
+	.dark-ocean {
+		background-image: url('dark-ocean.jpg');
+	}
+
+	.rain {
+		background-image: url('rain.gif');
+	}
+
+	.stars {
+		background-image: url('stars.jpg');
+	}
+	.ocean {
+		background-image: url('ocean.jpg');
 	}
 </style>

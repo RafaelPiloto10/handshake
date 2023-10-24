@@ -1,4 +1,4 @@
-import { initializeSVG, updateBarChart } from "./charts";
+import { updateBarChart } from "./charts";
 
 export const verses = [
 	['In a realm where silence wears a heavy shroud,'],
@@ -53,7 +53,7 @@ export const keyframes = [
 	{
 		activeVerse: 0,
 		activeLines: [0],
-		background: 'bg-[url("dark-ocean.jpg")] bg-cover',
+		background: 'dark-ocean',
 		render: (state_data: d3.DSVRowArray, resolution_data: d3.DSVRowArray) => {
 			const d2000s = state_data.filter((v) => v['FromYear'] === '2018');
 			const x = [
@@ -83,7 +83,7 @@ export const keyframes = [
 	{
 		activeVerse: 1,
 		activeLines: [1],
-		background: 'bg-[url("dark-ocean.jpg")] bg-cover',
+		background: 'dark-ocean',
 		render: (state_data: d3.DSVRowArray, resolution_data: d3.DSVRowArray) => {
 			const d2000s = state_data.filter((v) => v['FromYear'] === '2019');
 			const x = [
@@ -113,7 +113,7 @@ export const keyframes = [
 	{
 		activeVerse: 2,
 		activeLines: [2],
-		background: 'bg-[url("dark-ocean.jpg")] bg-cover',
+		background: 'dark-ocean',
 		render: (state_data: d3.DSVRowArray, resolution_data: d3.DSVRowArray) => {
 			const d2000s = state_data.filter((v) => v['FromYear'] === '2020');
 			const x = [
@@ -143,7 +143,7 @@ export const keyframes = [
 	{
 		activeVerse: 3,
 		activeLines: [3],
-		background: 'bg-[url("dark-ocean.jpg")] bg-cover',
+		background: 'dark-ocean',
 		render: (state_data: d3.DSVRowArray, resolution_data: d3.DSVRowArray) => {
 			const d2000s = state_data.filter((v) => v['FromYear'] === '2021');
 			const x = [
@@ -173,7 +173,7 @@ export const keyframes = [
 	{
 		activeVerse: 4,
 		activeLines: [],
-		background: 'bg-[url("dark-ocean.jpg")] bg-cover',
+		background: 'dark-ocean',
 		render: (state_data: d3.DSVRowArray, resolution_data: d3.DSVRowArray) => {
 			const x = [
 				'Age',
@@ -202,7 +202,7 @@ export const keyframes = [
 	{
 		activeVerse: 5,
 		activeLines: [0, 1],
-		background: 'bg-[url("rain.gif")] bg-cover',
+		background: 'rain',
 		render: (state_data: d3.DSVRowArray, resolution_data: d3.DSVRowArray) => {
 			const regions: string[] = [];
 			for (const row of state_data) {
@@ -225,7 +225,7 @@ export const keyframes = [
 	{
 		activeVerse: 6,
 		activeLines: [2, 3],
-		background: 'bg-[url("rain.gif")] bg-cover',
+		background: 'rain',
 		render: (state_data: d3.DSVRowArray, resolution_data: d3.DSVRowArray) => {
 			const states: string[] = [];
 			for (const row of state_data) {
@@ -250,7 +250,7 @@ export const keyframes = [
 	{
 		activeVerse: 7,
 		activeLines: [0, 1],
-		background: 'bg-[url("stars.jpg")] bg-cover',
+		background: 'stars',
 		render: (state_data: d3.DSVRowArray, resolution_data: d3.DSVRowArray) => {
 			const x: string[] = ['1997', '1998', '1999', '2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021'];
 
@@ -266,7 +266,7 @@ export const keyframes = [
 	{
 		activeVerse: 8,
 		activeLines: [2, 3],
-		background: 'bg-[url("stars.jpg")] bg-cover',
+		background: 'stars',
 		render: (state_data: d3.DSVRowArray, resolution_data: d3.DSVRowArray) => {
 			const resolutions: any = resolution_data.map((v) => {
 				return { ...v, Type: v['Type'] !== 'No Reasonable Cause' ? 'Settlement or Merit Resolution' : 'No Reasonable Cause' };
@@ -286,7 +286,7 @@ export const keyframes = [
 	{
 		activeVerse: 9,
 		activeLines: [0],
-		background: 'bg-[url("ocean.jpg")] bg-cover',
+		background: 'ocean',
 		render: (state_data: d3.DSVRowArray, resolution_data: d3.DSVRowArray) => {
 			const x: string[] = [];
 			for (const row of resolution_data) {
@@ -307,7 +307,7 @@ export const keyframes = [
 	{
 		activeVerse: 10,
 		activeLines: [1, 2],
-		background: 'bg-[url("ocean.jpg")] bg-cover',
+		background: 'ocean',
 		render: (state_data: d3.DSVRowArray, resolution_data: d3.DSVRowArray) => {
 			const x: string[] = [];
 			for (const row of resolution_data) {
@@ -330,7 +330,7 @@ export const keyframes = [
 	{
 		activeVerse: 11,
 		activeLines: [0],
-		background: 'bg-[url("ocean.jpg")] bg-cover',
+		background: 'ocean',
 		render: (state_data: d3.DSVRowArray, resolution_data: d3.DSVRowArray) => {
 			// Nothing, handshake animation
 		}
