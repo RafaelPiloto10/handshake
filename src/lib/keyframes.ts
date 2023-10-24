@@ -107,7 +107,7 @@ export const keyframes = [
 				return { x: v, y: y[i] };
 			});
 			const s = d.sort((a, b) => a.y > b.y ? -1 : 1);
-			updateBarChart(s, 'Equal Employment Opportunity Comission (EEOC) Cases by Charge Group (2019)');
+			updateBarChart(s, 'Equal Employment Opportunity Comission (EEOC) Cases by Charge Group (2019)', 80000);
 		}
 	},
 	{
@@ -137,7 +137,7 @@ export const keyframes = [
 				return { x: v, y: y[i] };
 			});
 			const s = d.sort((a, b) => a.y > b.y ? -1 : 1);
-			updateBarChart(s, 'Equal Employment Opportunity Comission (EEOC) Cases by Charge Group (2020)');
+			updateBarChart(s, 'Equal Employment Opportunity Comission (EEOC) Cases by Charge Group (2020)', 80000);
 		}
 	},
 	{
@@ -167,7 +167,7 @@ export const keyframes = [
 				return { x: v, y: y[i] };
 			});
 			const s = d.sort((a, b) => a.y > b.y ? -1 : 1);
-			updateBarChart(s, 'Equal Employment Opportunity Comission (EEOC) Cases by Charge Group (2021)');
+			updateBarChart(s, 'Equal Employment Opportunity Comission (EEOC) Cases by Charge Group (2021)', 80000);
 		}
 	},
 	{
@@ -214,12 +214,13 @@ export const keyframes = [
 			}
 
 			const y = regions.map((r) => state_data.filter((v) => v['Region'] === r).reduce((a, b) => a + parseInt(b['Count']), 0));
+			const colors = ['fill-red-500', 'fill-blue-500', 'fill-blue-500', 'fill-blue-500', 'fill-yellow-500'];
 			const d = regions.map((v, i) => {
-				return { x: v, y: y[i] };
+				return { x: v, y: y[i], color: colors[i] };
 			});
 
 			const s = d.sort((a, b) => a.y > b.y ? -1 : 1);
-			updateBarChart(s, 'All EEOC Cases by US Region');
+			updateBarChart(s, 'All EEOC Cases by US Region (1997 - 2021)');
 		}
 	},
 	{
@@ -238,12 +239,14 @@ export const keyframes = [
 
 			const y = states.map((r) => state_data.filter((v) => v['State'] === r).reduce((a, b) => a + parseInt(b['Count']), 0));
 			const d = states.map((v, i) => {
-				return { x: v, y: y[i] };
+				return { x: v, y: y[i]};
 			});
 
 			const s = d.sort((a, b) => a.y > b.y ? -1 : 1);
+			const colors = ['fill-red-500', 'fill-red-500', 'fill-blue-500', 'fill-yellow-500', 'fill-red-500', 'fill-blue-500', 'fill-yellow-500', 'fill-blue-500', 'fill-red-500', 'fill-red-500', 'fill-blue-500', 'fill-red-500', 'fill-red-500', 'fill-yellow-500', 'fill-yellow-500'];
 			const top10 = s.slice(0, 15);
-			updateBarChart(top10, 'All EEOC Cases by US State (Top 15)');
+			const top10WithColors = top10.map((v, i) => { return {...v, color: colors[i] } });
+			updateBarChart(top10WithColors, 'All EEOC Cases by US State 1997 - 2021 (Top 15)');
 
 		}
 	},
@@ -272,10 +275,11 @@ export const keyframes = [
 				return { ...v, Type: v['Type'] !== 'No Reasonable Cause' ? 'Settlement or Merit Resolution' : 'No Reasonable Cause' };
 			});
 			const x: string[] = ['No Reasonable Cause', 'Settlement or Merit Resolution'];
+			const color: string[] = ['fill-red-500', 'fill-green-400'];
 
 			const y = x.map((t) => resolutions.filter((v: any) => v['Type'] === t).reduce((a: any, b: any) => a + parseInt(b['Count'].replace(/,/g, '')), 0));
 			const d = x.map((v, i) => {
-				return { x: v, y: y[i] };
+				return { x: v, y: y[i], color: color[i] };
 			});
 
 			const s = d.sort((a, b) => a.y > b.y ? -1 : 1);
@@ -297,11 +301,11 @@ export const keyframes = [
 
 			const y = x.map((t) => resolution_data.filter((v: any) => v['Year'] === t && v['Type'] === 'No Reasonable Cause').reduce((a: any, b: any) => a + parseInt(b['Count'].replace(/,/g, '')), 0));
 			const d = x.map((v, i) => {
-				return { x: v, y: y[i] };
+				return { x: v, y: y[i], color: "fill-red-500" };
 			});
 
 			const s = d.sort((a, b) => a.x > b.x ? 1 : -1);
-			updateBarChart(s, 'EEOC Disability Cases Closed Per Year (1992 - 2021)');
+			updateBarChart(s, 'EEOC Disability Cases Closed Without Resolution Per Year (1992 - 2021)', 25000);
 		}
 	},
 	{
@@ -316,15 +320,13 @@ export const keyframes = [
 				}
 			}
 
-			const y = x.map((t) => resolution_data.filter((v: any) => v['Year'] === t && v['Type'] === 'No Reasonable Cause').reduce((a: any, b: any) => a + parseInt(b['Count'].replace(/,/g, '')), 0));
+			const y = x.map((t) => resolution_data.filter((v: any) => v['Year'] === t && v['Type'] !== 'No Reasonable Cause').reduce((a: any, b: any) => a + parseInt(b['Count'].replace(/,/g, '')), 0));
 			const d = x.map((v, i) => {
-				return { x: v, y: y[i] };
+				return { x: v, y: y[i], color: 'fill-green-500' };
 			});
 
-			const s = d.sort((a, b) => a.x > b.x ? -1 : 1);
-			const top10 = s.slice(0, 10);
-			const top10F = top10.sort((a, b) => a.x > b.x ? 1 : -1);
-			updateBarChart(top10F, 'EEOC Disability Cases Closed Per Year (1992 - 2021)');
+			const s = d.sort((a, b) => a.x > b.x ? 1 : -1);
+			updateBarChart(s, 'EEOC Disability Cases Closed With Resolution Per Year (1992 - 2021)', 25000);
 		}
 	},
 	{

@@ -6,6 +6,7 @@
 	import { initializeSVG } from '$lib/charts';
 	import { keyframes, verses } from '$lib/keyframes';
 	import Handshake from '$lib/components/icons/Handshake.svelte';
+	import Drag from '$lib/components/icons/Drag.svelte';
 
 	let mounted = false;
 	let ready = false;
@@ -55,7 +56,7 @@
 	class={`'text-white' flex h-full w-full flex-row items-center justify-center
 		fill-white transition-all duration-1000 ${backgroundFile} bg-cover`}
 >
-	<div class="h-full w-full bg-slate-900/70">
+	<div class="flex h-full w-full flex-row items-center justify-center bg-slate-900/70">
 		<div class={`flex h-full w-full max-w-[1440px] flex-col items-start justify-center p-8`}>
 			{#if mounted}
 				<div
@@ -155,7 +156,7 @@
 						</div>
 					</div>
 					<div class="flex w-full flex-row items-center justify-center">
-						<RightArrow />
+						<Drag />
 					</div>
 				{/if}
 			{/if}

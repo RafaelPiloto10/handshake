@@ -28,6 +28,7 @@ export function initializeSVG(width: number, height: number, xs: d3.ScaleBand<st
 	chartHeight = height - margin.top - margin.bottom;
 
 	chart = svg.append("g")
+		.attr("class", "group")
 		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 	xScale = d3.scaleBand()
@@ -56,14 +57,13 @@ export function initializeSVG(width: number, height: number, xs: d3.ScaleBand<st
 		.attr("x", width / 2)
 		.attr("y", 20)
 		.attr("text-anchor", "middle")
-		.style("font-size", "18px")
-		.style("fill", "black")
+		.attr("class", "text-xl text-white")
 		.text("");
 }
 
-export function updateBarChart(data: Data, title = "") {
+export function updateBarChart(data: Data, title = "", ys: undefined | number = undefined) {
 	xScale.domain(data.map(d => d.x));
-	yScale.domain([0, d3.max(data, d => d.y)]).nice();
+	yScale.domain([0, ys === undefined ? d3.max(data, d => d.y) : ys]).nice();
 
 	const bars = chart.selectAll(".bar")
 		.data(data, d => d.x);
@@ -73,6 +73,12 @@ export function updateBarChart(data: Data, title = "") {
 		.duration(500)
 		.attr("y", chartHeight)
 		.attr("height", 0)
+		.attr("class", d => {
+			const base = 'bar transition-colors bar group-hover:fill-slate-700 hover:!fill-white';
+			if (d.color)
+				return `${base} ${d.color}`;
+			return `fill-white ${base}`;
+		})
 		.remove();
 
 	bars
@@ -80,17 +86,26 @@ export function updateBarChart(data: Data, title = "") {
 		.duration(1000)
 		.attr("x", d => xScale(d.x))
 		.attr("y", d => yScale(d.y))
-		.attr("fill", "white")
+		.attr("class", d => {
+			const base = 'bar transition-colors bar group-hover:fill-slate-700 hover:!fill-white';
+			if (d.color)
+				return `${base} ${d.color}`;
+			return `fill-white ${base}`;
+		})
 		.attr("height", d => chartHeight - yScale(d.y))
 		.attr("width", xScale.bandwidth());
 
 	bars.enter().append("rect")
-		.attr("class", "bar")
+		.attr("class", d => {
+			const base = 'bar transition-colors bar group-hover:fill-slate-700 hover:!fill-white';
+			if (d.color)
+				return `${base} ${d.color}`;
+			return `fill-white ${base}`;
+		})
 		.attr("x", d => xScale(d.x))
 		.attr("y", chartHeight)
 		.attr("height", 0)
 		.attr("width", xScale.bandwidth())
-		.attr("fill", "white")
 		.transition()
 		.duration(1000)
 		.attr("y", d => yScale(d.y))
@@ -112,7 +127,7 @@ export function updateBarChart(data: Data, title = "") {
 		svg.select("#chart-title")
 			.transition()
 			.duration(1000)
-			.style("fill", "white" )
+			.attr("class", "text-white fill-white")
 			.text(title);
 	}
 }
