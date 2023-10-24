@@ -7,6 +7,7 @@
 	import { keyframes, verses } from '$lib/keyframes';
 	import Handshake from '$lib/components/icons/Handshake.svelte';
 	import Drag from '$lib/components/icons/Drag.svelte';
+	import Github from '$lib/components/icons/Github.svelte';
 
 	let mounted = false;
 	let ready = false;
@@ -56,8 +57,8 @@
 	class={`'text-white' flex h-full w-full flex-row items-center justify-center
 		fill-white transition-all duration-1000 ${backgroundFile} bg-cover`}
 >
-	<div class="flex h-full w-full flex-row items-center justify-center bg-slate-900/70">
-		<div class={`flex h-full w-full max-w-[1440px] flex-col items-start justify-center p-8`}>
+	<div class="flex h-full w-full flex-col items-center justify-center bg-slate-900/70 p-8 gap-2">
+		<div class={`flex h-full w-full max-w-[1440px] flex-col items-start justify-center`}>
 			{#if mounted}
 				<div
 					class={`${
@@ -174,6 +175,7 @@
 				</div>
 			{/if}
 		</div>
+		<p class="text-xs text-gray-500 flex flex-row items-center gap-2">See how this was built <a href="https://github.com/RafaelPiloto10/handshake" referrerpolicy="no-referrer" target="_blank"><Github /></a></p>
 	</div>
 </div>
 
