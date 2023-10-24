@@ -9,74 +9,72 @@ let xScale: d3.ScaleBand<string>;
 let yScale: d3.ScaleLinear<number, number, never>;
 
 type Data = {
-	x: string,
-	y: number
+	x: string;
+	y: number;
 }[];
 
-export function initializeSVG(width: number, height: number, xs: d3.ScaleBand<string>, ys: d3.ScaleLinear<number, number, never>) {
+export function initializeSVG(
+	width: number,
+	height: number,
+	xs: d3.ScaleBand<string>,
+	ys: d3.ScaleLinear<number, number, never>
+) {
 	xScale = xs;
 	yScale = ys;
 
-	svg = d3.select("#svg");
-	svg.attr("width", width);
-	svg.attr("height", height);
+	svg = d3.select('#svg');
+	svg.attr('width', width);
+	svg.attr('height', height);
 
-	svg.selectAll("*").remove();
+	svg.selectAll('*').remove();
 
 	const margin = { top: 30, right: 30, bottom: 50, left: 50 };
 	chartWidth = width - margin.left - margin.right;
 	chartHeight = height - margin.top - margin.bottom;
 
-	chart = svg.append("g")
-		.attr("class", "group")
-		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+	chart = svg
+		.append('g')
+		.attr('class', 'group')
+		.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
-	xScale = d3.scaleBand()
-		.domain([])
-		.range([0, chartWidth])
-		.padding(0.1);
+	xScale = d3.scaleBand().domain([]).range([0, chartWidth]).padding(0.1);
 
-	yScale = d3.scaleLinear()
-		.domain([])
-		.nice()
-		.range([chartHeight, 0]);
+	yScale = d3.scaleLinear().domain([]).nice().range([chartHeight, 0]);
 
-	chart.append("g")
-		.attr("class", "x-axis")
-		.attr("transform", `translate(0,${chartHeight})`)
+	chart
+		.append('g')
+		.attr('class', 'x-axis')
+		.attr('transform', `translate(0,${chartHeight})`)
 		.call(d3.axisBottom(xScale))
-		.selectAll("text");
+		.selectAll('text');
 
-	chart.append("g")
-		.attr("class", "y-axis")
-		.call(d3.axisLeft(yScale))
-		.selectAll("text");
+	chart.append('g').attr('class', 'y-axis').call(d3.axisLeft(yScale)).selectAll('text');
 
-	svg.append("text")
-		.attr("id", "chart-title")
-		.attr("x", width / 2)
-		.attr("y", 20)
-		.attr("text-anchor", "middle")
-		.attr("class", "text-xl text-white")
-		.text("");
+	svg
+		.append('text')
+		.attr('id', 'chart-title')
+		.attr('x', width / 2)
+		.attr('y', 20)
+		.attr('text-anchor', 'middle')
+		.attr('class', 'text-xl text-white')
+		.text('');
 }
 
-export function updateBarChart(data: Data, title = "", ys: undefined | number = undefined) {
-	xScale.domain(data.map(d => d.x));
-	yScale.domain([0, ys === undefined ? d3.max(data, d => d.y) : ys]).nice();
+export function updateBarChart(data: Data, title = '', ys: undefined | number = undefined) {
+	xScale.domain(data.map((d) => d.x));
+	yScale.domain([0, ys === undefined ? d3.max(data, (d) => d.y) : ys]).nice();
 
-	const bars = chart.selectAll(".bar")
-		.data(data, d => d.x);
+	const bars = chart.selectAll('.bar').data(data, (d) => d.x);
 
-	bars.exit()
+	bars
+		.exit()
 		.transition()
 		.duration(500)
-		.attr("y", chartHeight)
-		.attr("height", 0)
-		.attr("class", d => {
+		.attr('y', chartHeight)
+		.attr('height', 0)
+		.attr('class', (d) => {
 			const base = 'bar transition-colors bar group-hover:fill-slate-700 hover:!fill-white';
-			if (d.color)
-				return `${base} ${d.color}`;
+			if (d.color) return `${base} ${d.color}`;
 			return `fill-white ${base}`;
 		})
 		.remove();
@@ -84,50 +82,53 @@ export function updateBarChart(data: Data, title = "", ys: undefined | number = 
 	bars
 		.transition()
 		.duration(1000)
-		.attr("x", d => xScale(d.x))
-		.attr("y", d => yScale(d.y))
-		.attr("class", d => {
+		.attr('x', (d) => xScale(d.x))
+		.attr('y', (d) => yScale(d.y))
+		.attr('class', (d) => {
 			const base = 'bar transition-colors bar group-hover:fill-slate-700 hover:!fill-white';
-			if (d.color)
-				return `${base} ${d.color}`;
+			if (d.color) return `${base} ${d.color}`;
 			return `fill-white ${base}`;
 		})
-		.attr("height", d => chartHeight - yScale(d.y))
-		.attr("width", xScale.bandwidth());
+		.attr('height', (d) => chartHeight - yScale(d.y))
+		.attr('width', xScale.bandwidth());
 
-	bars.enter().append("rect")
-		.attr("class", d => {
+	bars
+		.enter()
+		.append('rect')
+		.attr('class', (d) => {
 			const base = 'bar transition-colors bar group-hover:fill-slate-700 hover:!fill-white';
-			if (d.color)
-				return `${base} ${d.color}`;
+			if (d.color) return `${base} ${d.color}`;
 			return `fill-white ${base}`;
 		})
-		.attr("x", d => xScale(d.x))
-		.attr("y", chartHeight)
-		.attr("height", 0)
-		.attr("width", xScale.bandwidth())
+		.attr('x', (d) => xScale(d.x))
+		.attr('y', chartHeight)
+		.attr('height', 0)
+		.attr('width', xScale.bandwidth())
 		.transition()
 		.duration(1000)
-		.attr("y", d => yScale(d.y))
-		.attr("height", d => chartHeight - yScale(d.y));
+		.attr('y', (d) => yScale(d.y))
+		.attr('height', (d) => chartHeight - yScale(d.y));
 
-	chart.select(".x-axis")
+	chart
+		.select('.x-axis')
 		.transition()
 		.duration(1000)
-		.attr("color", "white")
+		.attr('color', 'white')
 		.call(d3.axisBottom(xScale));
 
-	chart.select(".y-axis")
+	chart
+		.select('.y-axis')
 		.transition()
 		.duration(1000)
-		.attr("color", "white")
+		.attr('color', 'white')
 		.call(d3.axisLeft(yScale));
 
 	if (title.length > 0) {
-		svg.select("#chart-title")
+		svg
+			.select('#chart-title')
 			.transition()
 			.duration(1000)
-			.attr("class", "text-white fill-white")
+			.attr('class', 'text-white fill-white')
 			.text(title);
 	}
 }

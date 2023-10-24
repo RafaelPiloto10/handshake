@@ -2,17 +2,13 @@
 	import * as d3 from 'd3';
 	import { onMount } from 'svelte';
 
-
 	export let title: string;
 	export let chart: HTMLDivElement;
 	export let svg: SVGElement;
 
 	export let data: any;
 
-
-
-	onMount(() => {
-	});
+	onMount(() => {});
 </script>
 
 <div class="flex h-full w-full flex-col items-center justify-center gap-2">
