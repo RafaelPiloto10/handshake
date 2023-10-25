@@ -250,8 +250,8 @@ export const keyframes = [
 
 			const s = d.sort((a, b) => (a.y > b.y ? -1 : 1));
 			updateBarChart(s, 'All EEOC Cases by US Region (1997 - 2021)', undefined, [
-				{ color: 'red', label: 'Republican' },
-				{ color: 'blue', label: 'Democrats' },
+				{ color: 'red', label: 'Majority Republican' },
+				{ color: 'blue', label: 'Majority Democrat' },
 				{ color: 'yellow', label: 'Split' }
 			]);
 		}
@@ -304,8 +304,8 @@ export const keyframes = [
 				'All EEOC Cases by US State 1997 - 2021 (Top 15)',
 				undefined,
 				[
-					{ color: 'red', label: 'Republican' },
-					{ color: 'blue', label: 'Democrats' },
+					{ color: 'red', label: 'Majority Republican' },
+					{ color: 'blue', label: 'Majority Democrat' },
 					{ color: 'yellow', label: 'Split' }
 				]
 			);
