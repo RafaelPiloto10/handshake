@@ -1,5 +1,4 @@
 <script lang="ts">
-	import RightArrow from '$lib/components/icons/RightArrow.svelte';
 	import { onMount } from 'svelte';
 	import { inview } from 'svelte-inview';
 	import * as d3 from 'd3';

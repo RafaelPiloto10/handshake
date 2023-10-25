@@ -5,8 +5,11 @@ let chartHeight = 300;
 
 let chart: any;
 let svg: any;
+
 let xScale: d3.ScaleBand<string>;
 let yScale: d3.ScaleLinear<number, number, never>;
+
+const margin = { top: 30, right: 30, bottom: 50, left: 50 };
 
 type Data = {
 	x: string;
@@ -28,7 +31,6 @@ export function initializeSVG(
 
 	svg.selectAll('*').remove();
 
-	const margin = { top: 30, right: 30, bottom: 50, left: 50 };
 	chartWidth = width - margin.left - margin.right;
 	chartHeight = height - margin.top - margin.bottom;
 
@@ -60,9 +62,31 @@ export function initializeSVG(
 		.text('');
 }
 
-export function updateBarChart(data: Data, title = '', ys: undefined | number = undefined) {
+export function updateBarChart(data: Data, title = '', ys: undefined | number = undefined, legend: {color: string, label: string}[] = []) {
 	xScale.domain(data.map((d) => d.x));
 	yScale.domain([0, ys === undefined ? d3.max(data, (d) => d.y) : ys]).nice();
+
+	svg.selectAll(".label").remove();
+	if (legend.length > 0) {
+		for (let i = 0; i < legend.length; i++) {
+			const l = legend[i];
+			const label = svg.append('g').attr('class', 'label');
+			const xLoc = (chartWidth / 2) - (150 * ((legend.length / 2) - i)) + 75;
+			label
+				.append("circle")
+				.attr("cx", xLoc)
+				.attr("cy", chartHeight + margin.bottom + 15)
+				.attr("r", 6)
+				.style("fill", l.color)
+			label
+				.append("text")
+				.attr('x', xLoc + 10)
+				.attr('y', chartHeight + margin.bottom + 15)
+				.text(l.label)
+				.style("font-size", "15px")
+				.attr("alignment-baseline","middle")
+		}
+	}
 
 	const bars = chart.selectAll('.bar').data(data, (d) => d.x);
 

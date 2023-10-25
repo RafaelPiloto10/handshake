@@ -79,7 +79,7 @@ export const keyframes = [
 			const s = d.sort((a, b) => (a.y > b.y ? -1 : 1));
 			updateBarChart(
 				s,
-				'Equal Employment Opportunity Comission (EEOC) Cases by Charge Group (2018)'
+				'Equal Employment Opportunity Comission (EEOC) Cases by Charge Group (2018)',
 			);
 		}
 	},
@@ -246,7 +246,7 @@ export const keyframes = [
 			});
 
 			const s = d.sort((a, b) => (a.y > b.y ? -1 : 1));
-			updateBarChart(s, 'All EEOC Cases by US Region (1997 - 2021)');
+			updateBarChart(s, 'All EEOC Cases by US Region (1997 - 2021)', undefined, [{color: "red", label: "Republican"}, {color: "blue", label: "Democrats"}, {color: "yellow", label: "Split"}]);
 		}
 	},
 	{
@@ -292,7 +292,7 @@ export const keyframes = [
 			const top10WithColors = top10.map((v, i) => {
 				return { ...v, color: colors[i] };
 			});
-			updateBarChart(top10WithColors, 'All EEOC Cases by US State 1997 - 2021 (Top 15)');
+			updateBarChart(top10WithColors, 'All EEOC Cases by US State 1997 - 2021 (Top 15)', undefined, [{color: "red", label: "Republican"}, {color: "blue", label: "Democrats"}, {color: "yellow", label: "Split"}]);
 		}
 	},
 	{
@@ -371,7 +371,7 @@ export const keyframes = [
 			});
 
 			const s = d.sort((a, b) => (a.y > b.y ? -1 : 1));
-			updateBarChart(s, 'EEOC Disability Case Resolutions by Type (1992 - 2021)');
+			updateBarChart(s, 'EEOC Disability Case Resolutions by Type (1992 - 2021)', undefined,  [{color: "red", label: "Closed"}, {color: "green", label: "Compensated"}]);
 		}
 	},
 
@@ -400,7 +400,8 @@ export const keyframes = [
 			updateBarChart(
 				s,
 				'EEOC Disability Cases Closed Without Resolution Per Year (1992 - 2021)',
-				25000
+				25000,
+				[{color: "red", label: "Closed"}]
 			);
 		}
 	},
@@ -429,7 +430,8 @@ export const keyframes = [
 			updateBarChart(
 				s,
 				'EEOC Disability Cases Closed With Resolution Per Year (1992 - 2021)',
-				25000
+				25000,
+				[{color: "green", label: "Compensated"}]
 			);
 		}
 	},
