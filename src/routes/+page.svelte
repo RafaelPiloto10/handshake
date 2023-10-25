@@ -10,7 +10,7 @@
 
 	let mounted = false;
 	let ready = false;
-	const loadTime = 5000;
+	const loadTime = 0;
 
 	// Chart constants
 	const margin = { top: 30, right: 30, bottom: 50, left: 50 };

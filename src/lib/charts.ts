@@ -76,7 +76,7 @@ export function updateBarChart(
 		for (let i = 0; i < legend.length; i++) {
 			const l = legend[i];
 			const label = svg.append('g').attr('class', 'label');
-			const xLoc = chartWidth / 2 - 150 * (legend.length / 2 - i) + 75;
+			const xLoc = chartWidth / 2 - 160 * (legend.length / 2 - i) + 75;
 			label
 				.append('circle')
 				.attr('cx', xLoc)
