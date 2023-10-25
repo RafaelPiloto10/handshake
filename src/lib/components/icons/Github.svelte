@@ -1,7 +1,7 @@
 <svg
 	enable-background="new 0 0 32 32"
 	id="Layer_1"
-	class="w-4 h-4"
+	class="h-4 w-4"
 	version="1.0"
 	viewBox="0 0 32 32"
 	width="32px"
