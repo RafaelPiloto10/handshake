@@ -82,7 +82,7 @@ export const keyframes = [
 			const s = d.sort((a, b) => (a.y > b.y ? -1 : 1));
 			updateBarChart(
 				s,
-				'Equal Employment Opportunity Comission (EEOC) Cases by Charge Group (2018)'
+				'Equal Employment Opportunity Commission (EEOC) Cases by Charge Group (2018)'
 			);
 		}
 	},
@@ -115,7 +115,7 @@ export const keyframes = [
 			const s = d.sort((a, b) => (a.y > b.y ? -1 : 1));
 			updateBarChart(
 				s,
-				'Equal Employment Opportunity Comission (EEOC) Cases by Charge Group (2019)',
+				'Equal Employment Opportunity Commission (EEOC) Cases by Charge Group (2019)',
 				80000
 			);
 		}
@@ -149,7 +149,7 @@ export const keyframes = [
 			const s = d.sort((a, b) => (a.y > b.y ? -1 : 1));
 			updateBarChart(
 				s,
-				'Equal Employment Opportunity Comission (EEOC) Cases by Charge Group (2020)',
+				'Equal Employment Opportunity Commission (EEOC) Cases by Charge Group (2020)',
 				80000
 			);
 		}
@@ -183,7 +183,7 @@ export const keyframes = [
 			const s = d.sort((a, b) => (a.y > b.y ? -1 : 1));
 			updateBarChart(
 				s,
-				'Equal Employment Opportunity Comission (EEOC) Cases by Charge Group (2021)',
+				'Equal Employment Opportunity Commission (EEOC) Cases by Charge Group (2021)',
 				80000
 			);
 		}
@@ -216,7 +216,7 @@ export const keyframes = [
 			const s = d.sort((a, b) => (a.y > b.y ? -1 : 1));
 			updateBarChart(
 				s,
-				'All Equal Employment Opportunity Comission (EEOC) Cases by Charge Group (2017 - 2021)'
+				'All Equal Employment Opportunity Commission (EEOC) Cases by Charge Group (2017 - 2021)'
 			);
 		}
 	},
