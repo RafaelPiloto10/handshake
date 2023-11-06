@@ -7,10 +7,11 @@
 	import Handshake from '$lib/components/icons/Handshake.svelte';
 	import Drag from '$lib/components/icons/Drag.svelte';
 	import Github from '$lib/components/icons/Github.svelte';
+	import { filterColors } from '$lib/charts';
 
 	let mounted = false;
 	let ready = false;
-	const loadTime = 5000;
+	const loadTime = 0;
 
 	// Chart constants
 	const margin = { top: 30, right: 30, bottom: 50, left: 50 };
@@ -40,6 +41,24 @@
 				}, 500);
 			}, 100);
 		}, loadTime);
+
+		window.addEventListener('click', (e) => {
+			if (e.target instanceof Element) {
+				let el = e.target as Element;
+				if (el.tagName.toLowerCase() === 'rect') {
+					console.log('clicked on rect');
+					for (const c of el.classList.values()) {
+						if (c.startsWith('fill-') && c === 'fill-slate-700') {
+							continue;
+						} else if (c.startsWith('fill-') && c !== 'fill-white') {
+							console.log(c);
+							filterColors(c);
+							keyframes[keyframe].render(state_data, resolution_data);
+						}
+					}
+				}
+			}
+		});
 	});
 
 	$: keyframe = 0;

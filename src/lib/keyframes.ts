@@ -1,4 +1,4 @@
-import { updateBarChart } from './charts';
+import { filterColors, updateBarChart } from './charts';
 
 export const verses = [
 	['In a realm where silence wears a heavy shroud,'],
@@ -214,6 +214,8 @@ export const keyframes = [
 				return { x: v, y: y[i] };
 			});
 			const s = d.sort((a, b) => (a.y > b.y ? -1 : 1));
+
+			filterColors('');
 			updateBarChart(
 				s,
 				'All Equal Employment Opportunity Commission (EEOC) Cases by Charge Group (2017 - 2021)'
@@ -354,6 +356,7 @@ export const keyframes = [
 			});
 
 			const s = d.sort((a, b) => (parseInt(a.x) > parseInt(b.x) ? 1 : -1));
+			filterColors('');
 			updateBarChart(
 				s,
 				'EEOC Disability Case Monetary Resolutions (in Millions) Per Year (1997 - 2021)'
@@ -416,6 +419,7 @@ export const keyframes = [
 			});
 
 			const s = d.sort((a, b) => (a.x > b.x ? 1 : -1));
+			filterColors('');
 			updateBarChart(
 				s,
 				'EEOC Disability Cases Closed Without Resolution Per Year (1992 - 2021)',
@@ -446,6 +450,7 @@ export const keyframes = [
 			});
 
 			const s = d.sort((a, b) => (a.x > b.x ? 1 : -1));
+			filterColors('');
 			updateBarChart(
 				s,
 				'EEOC Disability Cases Closed With Resolution Per Year (1992 - 2021)',

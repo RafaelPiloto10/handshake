@@ -16,6 +16,16 @@ type Data = {
 	y: number;
 }[];
 
+let filtered = '';
+
+export function filterColors(v: string) {
+	if (filtered && filtered === v) {
+		filtered = '';
+	} else {
+		filtered = v;
+	}
+}
+
 export function initializeSVG(
 	width: number,
 	height: number,
@@ -102,9 +112,19 @@ export function updateBarChart(
 		.attr('y', chartHeight)
 		.attr('height', 0)
 		.attr('class', (d) => {
-			const base = 'bar transition-colors bar group-hover:fill-slate-700 hover:!fill-white';
-			if (d.color) return `${base} ${d.color}`;
-			return `fill-white ${base}`;
+			const base = 'bar transition-colors bar';
+			const hover = 'group-hover:fill-slate-700 hover:!fill-white';
+
+			if (filtered && d.color) {
+				if (d.color === filtered) {
+					return `${base} ${d.color}`;
+				} else {
+					return `${base} !fill-slate-700 ${d.color}`;
+				}
+			}
+
+			if (d.color) return `${base} ${hover} ${d.color}`;
+			return `fill-white ${base} ${hover}`;
 		})
 		.remove();
 
@@ -114,9 +134,19 @@ export function updateBarChart(
 		.attr('x', (d) => xScale(d.x))
 		.attr('y', (d) => yScale(d.y))
 		.attr('class', (d) => {
-			const base = 'bar transition-colors bar group-hover:fill-slate-700 hover:!fill-white';
-			if (d.color) return `${base} ${d.color}`;
-			return `fill-white ${base}`;
+			const base = 'bar transition-colors bar';
+			const hover = 'group-hover:fill-slate-700 hover:!fill-white';
+
+			if (filtered && d.color) {
+				if (d.color === filtered) {
+					return `${base} ${d.color}`;
+				} else {
+					return `${base} !fill-slate-700 ${d.color}`;
+				}
+			}
+
+			if (d.color) return `${base} ${hover} ${d.color}`;
+			return `fill-white ${base} ${hover}`;
 		})
 		.attr('height', (d) => chartHeight - yScale(d.y))
 		.attr('width', xScale.bandwidth());
@@ -125,9 +155,20 @@ export function updateBarChart(
 		.enter()
 		.append('rect')
 		.attr('class', (d) => {
-			const base = 'bar transition-colors bar group-hover:fill-slate-700 hover:!fill-white';
-			if (d.color) return `${base} ${d.color}`;
-			return `fill-white ${base}`;
+			const base = 'bar transition-colors bar';
+			const hover = 'group-hover:fill-slate-700 hover:!fill-white';
+
+			if (filtered) {
+				if (d.color === filtered) {
+					return `${base} ${d.color}`;
+				} else {
+					return `${base} !fill-slate-700 ${d.color}`;
+				}
+			}
+
+			if (d.color) return `${base} ${hover} ${d.color}`;
+			return `fill-white ${base} ${hover}`;
+
 		})
 		.attr('x', (d) => xScale(d.x))
 		.attr('y', chartHeight)
