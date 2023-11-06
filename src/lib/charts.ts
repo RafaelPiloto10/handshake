@@ -17,6 +17,7 @@ type Data = {
 }[];
 
 let filtered = '';
+let showValues = false;
 
 export function filterColors(v: string) {
 	if (filtered && filtered === v) {
@@ -104,6 +105,22 @@ export function updateBarChart(
 	}
 
 	const bars = chart.selectAll('.bar').data(data, (d) => d.x);
+	const tips = chart.selectAll('.tip').data(data, (d) => d.y);
+	const ids = new Map<string, number>();
+	data.map((v, i) => ids.set(v.x, i));
+
+	tips
+		.exit()
+		.remove();
+
+	tips
+		.enter()
+		.append('text')
+		.attr('class', (d) => `tip tip-${ids.get(d.x)}`)
+		.attr('x', (d) => xScale(d.x) + (xScale.bandwidth() / 4))
+		.attr('y', (d) => yScale(d.y) - 10)
+		.style('fill', 'none')
+		.text((d) => d.y)
 
 	bars
 		.exit()
@@ -113,7 +130,7 @@ export function updateBarChart(
 		.attr('height', 0)
 		.attr('class', (d) => {
 			const base = 'bar transition-colors bar';
-			const hover = 'group-hover:fill-slate-700 hover:!fill-white';
+			const hover = `group-hover:fill-slate-700 hover:!fill-white`;
 
 			if (filtered && d.color) {
 				if (d.color === filtered) {
@@ -135,7 +152,7 @@ export function updateBarChart(
 		.attr('y', (d) => yScale(d.y))
 		.attr('class', (d) => {
 			const base = 'bar transition-colors bar';
-			const hover = 'group-hover:fill-slate-700 hover:!fill-white';
+			const hover = `group-hover:fill-slate-700 hover:!fill-white`;
 
 			if (filtered && d.color) {
 				if (d.color === filtered) {
@@ -156,7 +173,7 @@ export function updateBarChart(
 		.append('rect')
 		.attr('class', (d) => {
 			const base = 'bar transition-colors bar';
-			const hover = 'group-hover:fill-slate-700 hover:!fill-white';
+			const hover = `group-hover:fill-slate-700 hover:!fill-white`;
 
 			if (filtered) {
 				if (d.color === filtered) {
@@ -168,7 +185,6 @@ export function updateBarChart(
 
 			if (d.color) return `${base} ${hover} ${d.color}`;
 			return `fill-white ${base} ${hover}`;
-
 		})
 		.attr('x', (d) => xScale(d.x))
 		.attr('y', chartHeight)
@@ -201,4 +217,16 @@ export function updateBarChart(
 			.attr('class', 'text-white fill-white text-2xl')
 			.text(title);
 	}
+
+	setTimeout(() => {
+		d3.selectAll('.bar')
+			.on('mouseover', (e, d) => {
+				d3.select(`.tip-${ids.get(d.x)}`)
+					.style('fill', 'white');
+			})
+			.on('mouseleave', (e, d) => {
+				d3.selectAll('.tip')
+					.style('fill', 'none');
+			});
+	}, 1100);
 }
